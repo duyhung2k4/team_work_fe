@@ -26,7 +26,7 @@ export const axiosBaseQuery =
         headers,
       })
       return { 
-        data: result.data.data,
+        data: result.data,
         error: null,
         success: false
       }

@@ -3,13 +3,14 @@ import { PasswordInput, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { FormFieldRegister } from "./field";
 import { formId } from "../form.id";
-import { useSendRegisterInfoMutation, useSendRegisterInfoNewMutation } from "@/redux/query/api/register.api";
+import { useSendRegisterInfoMutation } from "@/redux/query/api/register.api";
 import { ROLE } from "@/model/role";
+import { useNotification } from "@/hook/useNotification";
 
 const FormRegister: React.FC = () => {
 
   const [post] = useSendRegisterInfoMutation();
-  const [postNew] = useSendRegisterInfoNewMutation();
+  const notification = useNotification();
   
   const form = useForm<FormFieldRegister>({
     initialValues: {
@@ -27,19 +28,19 @@ const FormRegister: React.FC = () => {
   });
 
   const handleSubmit = async (values: FormFieldRegister) => {
-    post({
+    const result = await post({
       username: values.username,
       password: values.password,
       email: values.email,
       role: ROLE.USER,
     });
-    postNew({
-      username: values.username,
-      password: values.password,
-      email: values.email,
-      role: ROLE.USER,
-    })
 
+    if("error" in result) {
+      notification.error("Email đã tồn tại");
+      return;
+    }
+
+    console.log(result);
   }
 
   return (

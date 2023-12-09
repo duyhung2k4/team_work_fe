@@ -11,13 +11,9 @@ export const registerApi = createApi({
     [`${endPointName.register.sendRegisterInfo.name}`]: builder.mutation<any, RequestSendInfoRegister>({
       query: (payload) => endPoint.public.sendInfoRegister(payload) as any,
     }),
-    [`${endPointName.register.sendRegisterInfoNew.name}`]: builder.mutation<any, RequestSendInfoRegister>({
-      query: (payload) => endPoint.public.sendInfoRegister(payload) as any,
-    })
   })
 });
 
 export const {
   useSendRegisterInfoMutation,
-  useSendRegisterInfoNewMutation
 } = registerApi;
