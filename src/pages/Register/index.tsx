@@ -10,9 +10,9 @@ import {
   Text
 } from "@mantine/core";
 import { stylePageRegister } from "./styles";
-import { formId } from "@/form/form.id";
 import { useStatus } from "@/redux/hook";
 import { END_POINT_NAME, STATUS, TYPE_API } from "@/redux/query/endPointName";
+import { FORM_ID } from "@/form/form.id";
 
 const Register: React.FC = () => {
   const { classes, theme } = stylePageRegister();
@@ -35,7 +35,7 @@ const Register: React.FC = () => {
         <Stack mt={30}>
           <Button
             type="submit"
-            form={formId.register}
+            form={FORM_ID.REGISTER}
           >Đăng kí</Button>
           <Divider
             my={0}

@@ -6,3 +6,8 @@ export interface RequestSendInfoRegister {
   email: string
   role: ROLE
 }
+
+export interface RequestConfirmCodeRegister {
+  saveInfoId: number
+  code: string
+}

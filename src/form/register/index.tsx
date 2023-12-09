@@ -1,16 +1,23 @@
 import React from "react";
+import dayjs from "dayjs";
+import Cookies from "js-cookie";
+
 import { PasswordInput, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { FormFieldRegister } from "./field";
-import { formId } from "../form.id";
 import { useSendRegisterInfoMutation } from "@/redux/query/api/register.api";
 import { ROLE } from "@/model/role";
 import { useNotification } from "@/hook/useNotification";
+import { COOKIES } from "@/constant/cookies";
+import { useNavigate } from "react-router";
+import { ROUTER } from "@/constant/router";
+import { FORM_ID } from "../form.id";
 
 const FormRegister: React.FC = () => {
 
   const [post] = useSendRegisterInfoMutation();
   const notification = useNotification();
+  const navigation = useNavigate();
   
   const form = useForm<FormFieldRegister>({
     initialValues: {
@@ -40,11 +47,19 @@ const FormRegister: React.FC = () => {
       return;
     }
 
-    console.log(result);
+    const data = result.data.data;
+    if(data === null) {
+      notification.error("Có lỗi khi xử lí. Vui lòng thử lại sau!");
+      return;
+    }
+    
+    const finishAt = dayjs(data.finishAt).add(5, "minute");
+    Cookies.set(COOKIES.EXPRICE_INFO_REGISTER, JSON.stringify(data), { expires: finishAt.toDate() } );
+    navigation(ROUTER.PUBLIC.CONFIRM_CODE_REGISTER.INDEX);
   }
 
   return (
-    <form id={formId.register} onSubmit={form.onSubmit(handleSubmit)}>
+    <form id={FORM_ID.REGISTER} onSubmit={form.onSubmit(handleSubmit)}>
       <Stack spacing={20}>
         <TextInput
           withAsterisk
