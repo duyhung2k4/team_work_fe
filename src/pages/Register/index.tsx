@@ -13,10 +13,12 @@ import { stylePageRegister } from "./styles";
 import { useStatus } from "@/redux/hook";
 import { END_POINT_NAME, STATUS, TYPE_API } from "@/redux/query/endPointName";
 import { FORM_ID } from "@/form/form.id";
+import { useNavigate } from "react-router";
+import { ROUTER } from "@/constant/router";
 
 const Register: React.FC = () => {
   const { classes, theme } = stylePageRegister();
-
+  const navigation = useNavigate();
   const status = useStatus("registerApi", TYPE_API.mutation, END_POINT_NAME.REGISTER_SEND_REGISTER_INFO);
 
 
@@ -43,7 +45,9 @@ const Register: React.FC = () => {
             labelPosition="center"
             color={theme.colors["gray"][6]}
           />
-          <Button>Đăng nhập</Button>
+          <Button
+            onClick={() => navigation(ROUTER.PUBLIC.LOGIN.INDEX)}
+          >Đăng nhập</Button>
         </Stack>
       </Stack>
     </Group>

@@ -1,5 +1,6 @@
 import { HEADER } from "@/constant/header";
 import { METHOD } from "@/constant/method";
+import { LoginRequest } from "@/dto/request/login.request";
 import { RequestConfirmCodeRegister, RequestSendInfoRegister } from "@/dto/request/register.request";
 import { AxiosRequestConfig } from "axios";
 
@@ -13,6 +14,12 @@ export const endPoint = {
     }),
     confirmCodeRegister: (data: RequestConfirmCodeRegister): AxiosRequestConfig => ({
       url: "/api/v1/public/confirm_code",
+      method: METHOD.POST,
+      headers: HEADER.public(),
+      data,
+    }),
+    loginInfo: (data: LoginRequest) => ({
+      url: "/api/v1/public/login",
       method: METHOD.POST,
       headers: HEADER.public(),
       data,

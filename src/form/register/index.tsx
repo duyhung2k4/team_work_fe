@@ -60,7 +60,7 @@ const FormRegister: React.FC = () => {
 
   return (
     <form id={FORM_ID.REGISTER} onSubmit={form.onSubmit(handleSubmit)}>
-      <Stack spacing={20}>
+      <Stack spacing={24}>
         <TextInput
           withAsterisk
           placeholder="Tên đăng nhập"

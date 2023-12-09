@@ -1,9 +1,12 @@
 import React, { Suspense } from "react";
 import { Routes, Route } from "react-router";
 import { ROUTER } from "@/constant/router";
-import { 
-  ComfirmCodeRegisterPage, 
-  LoginPage, 
+import {
+  ComfirmCodeRegisterPage,
+  DashboardPage,
+  LoginPage,
+  ProtectedPage,
+  PublicPage,
   RegisterPage,
 } from "./page";
 
@@ -11,10 +14,13 @@ const AppRouter: React.FC = () => {
   return (
     <Suspense fallback={"Loading...."}>
       <Routes>
-        <Route>
+        <Route element={<PublicPage />}>
           <Route path={ROUTER.PUBLIC.REGISTER.INDEX} element={<RegisterPage />} />
           <Route path={ROUTER.PUBLIC.LOGIN.INDEX} element={<LoginPage />} />
           <Route path={ROUTER.PUBLIC.CONFIRM_CODE_REGISTER.INDEX} element={<ComfirmCodeRegisterPage />} />
+        </Route>
+        <Route element={<ProtectedPage />}>
+          <Route path={ROUTER.PROTECTED.DASHBOARD.INDEX} element={<DashboardPage />} />
         </Route>
       </Routes>
     </Suspense>
