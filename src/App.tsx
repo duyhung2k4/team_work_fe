@@ -4,7 +4,12 @@ import AppRouter from './router'
 function App() {
 
   return (
-    <div>
+    <div
+      style={{
+        height: "100vh",
+        width: "100%",
+      }}
+    >
       <AppRouter/>
     </div>
   )
