@@ -24,5 +24,13 @@ export const endPoint = {
       headers: HEADER.public(),
       data,
     })
+  },
+
+  protected: {
+    loginToken: () => ({
+      url: "/api/v1/protected/login_token",
+      method: METHOD.POST,
+      headers: HEADER.protected("refresh"),
+    })
   }
 }

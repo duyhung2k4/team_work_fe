@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { registerSlice } from "./slice/profile.slice";
+import { profileSlice } from "./slice/profile.slice";
 import { registerApi } from "./query/api/register.api";
 import { loginApi } from "./query/api/login.api";
 
@@ -8,6 +8,6 @@ export const apiReducer = {
   [loginApi.reducerPath]: loginApi.reducer,
 }
 export const reducer = combineReducers({
-  profile: registerSlice.reducer,
+  profile: profileSlice.reducer,
   ...apiReducer,
 })

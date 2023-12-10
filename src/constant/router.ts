@@ -11,6 +11,9 @@ export const ROUTER = {
     }
   },
   PROTECTED: {
+    DEFAULT: {
+      INDEX: "/"
+    },
     DASHBOARD: {
       INDEX: "/dashboard"
     }
