@@ -1,9 +1,10 @@
-import Loading from "@/components/Loading";
+import React, { useEffect } from "react";
+import Loading from "@/layout/Loading";
+
 import { ROUTER } from "@/constant/router";
 import { useAppSelector } from "@/redux/hook";
 import { useLoginTokenMutation } from "@/redux/query/api/login.api";
 import { RootState } from "@/redux/store";
-import React, { useEffect } from "react";
 import { Navigate, Outlet } from "react-router";
 
 const Public: React.FC = () => {

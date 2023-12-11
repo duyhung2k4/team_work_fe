@@ -9,7 +9,7 @@ import {
   PublicPage,
   RegisterPage,
 } from "./page";
-import Loading from "@/components/Loading";
+import Loading from "@/layout/Loading";
 
 const AppRouter: React.FC = () => {
   return (
