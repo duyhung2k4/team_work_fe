@@ -15,10 +15,13 @@ import { END_POINT_NAME, STATUS, TYPE_API } from "@/redux/query/endPointName";
 import { FORM_ID } from "@/form/form.id";
 import { useNavigate } from "react-router";
 import { ROUTER } from "@/constant/router";
+import { AppScreen, useScreen } from "@/hook/useScreen";
 
 const Register: React.FC = () => {
   const { classes, theme } = stylePageRegister();
   const navigation = useNavigate();
+
+  const screen: AppScreen = useScreen();
   const status = useStatus("registerApi", TYPE_API.mutation, END_POINT_NAME.REGISTER_SEND_REGISTER_INFO);
 
 
@@ -27,10 +30,10 @@ const Register: React.FC = () => {
       className={classes.root}
       position="center"
     >
-      <Stack className={classes.form} pos={"relative"}>
+      <Stack className={screen.width > 460 ? classes.form : classes.formMobile} pos={"relative"}>
         <LoadingOverlay
           visible={status === STATUS.PENDING}
-          radius={30}
+          radius={screen.width > 460 ? 30 : 0}
         />
         <Text className={classes.title}>Đăng kí</Text>
         <FormRegister />

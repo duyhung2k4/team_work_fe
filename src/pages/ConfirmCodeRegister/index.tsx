@@ -12,6 +12,7 @@ import { useConfirmCodeRegisterMutation, useSendRegisterInfoMutation } from "@/r
 import { useStatus } from "@/redux/hook";
 import { END_POINT_NAME, STATUS, TYPE_API } from "@/redux/query/endPointName";
 import { useNotification } from "@/hook/useNotification";
+import { AppScreen, useScreen } from "@/hook/useScreen";
 
 
 const textButton = {
@@ -24,6 +25,7 @@ const ComfirmCodeRegister: React.FC = () => {
   const [exprice, setExprice] = useState<number | null>(null);
   const [code, setCode] = useState<string | undefined>(undefined);
 
+  const screen: AppScreen = useScreen();
   const statusConfirm = useStatus("registerApi", TYPE_API.mutation, END_POINT_NAME.REGISTER_SEND_REGISTER_INFO);
   const statusSendInfo = useStatus("registerApi", TYPE_API.mutation, END_POINT_NAME.REGISTER_SEND_REGISTER_INFO);
   const status = statusConfirm === STATUS.PENDING || statusSendInfo === STATUS.PENDING ? true : false;
@@ -109,10 +111,13 @@ const ComfirmCodeRegister: React.FC = () => {
       position="center"
     >
       <Stack 
-        className={classes.form}
+        className={screen.width > 460 ? classes.form : classes.formMobile}
         pos={"relative"}
       >
-        <LoadingOverlay radius={30} visible={status}/>
+        <LoadingOverlay 
+          visible={status}
+          radius={screen.width > 460 ? 30 : 0}
+        />
         <Text className={classes.title}>Nhập mã xác nhận</Text>
           <Stack>
             <TextInput

@@ -14,24 +14,26 @@ import FormLogin from "@/form/login";
 import { useNavigate } from "react-router";
 import { ROUTER } from "@/constant/router";
 import { useStatus } from "@/redux/hook";
+import { AppScreen, useScreen } from "@/hook/useScreen";
 
 const Login: React.FC = () => {
   const { classes, theme } = loginStyles();
   const navigation = useNavigate();
-
+  
   const status = useStatus("loginApi", TYPE_API.mutation, END_POINT_NAME.LOGIN_INFO);
+  const screen: AppScreen = useScreen();
 
   return (
     <Group
       className={classes.root}
       position="center"
     >
-      <Stack className={classes.form} pos={"relative"}>
+      <Stack className={screen.width > 460 ? classes.form : classes.formMobile} pos={"relative"}>
         <LoadingOverlay
           visible={status === STATUS.PENDING}
-          radius={30}
+          radius={screen.width > 460 ? 30 : 0}
         />
-        <Text className={classes.title}>Đăng kí</Text>
+        <Text className={classes.title}>Đăng nhập</Text>
         <FormLogin/>
         <Stack mt={30}>
           <Button

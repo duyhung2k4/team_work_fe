@@ -20,9 +20,20 @@ export const loginStyles = createStyles((theme) => {
       backgroundColor: theme.colors.info[0],
       padding: 60,
       minWidth: 400,
+      transition: "200ms",
       "& .mantine-Button-root": {
         textTransform: "uppercase"
       }
     },
+    formMobile: {
+      backgroundColor: theme.colors.info[0],
+      padding: 60,
+      width: "100%",
+      height: "100vh",
+      transition: "200ms",
+      "& .mantine-Button-root": {
+        textTransform: "uppercase"
+      }
+    }
   }
 })
