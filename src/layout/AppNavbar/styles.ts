@@ -1,7 +1,9 @@
 import { MENU_SIZE } from "@/constant/screen";
+import { StatusMenu } from "@/context/menu/reducer";
 import { createStyles } from "@mantine/core";
 
-export const stylesAppNavbar = createStyles(() => {
+export const stylesAppNavbar = createStyles((_, status: StatusMenu) => {
+  const sizeNavbar = status === "open" ? MENU_SIZE.OPEN : MENU_SIZE.CLOSE;
   return {
     root: {
       height: "100vh",
@@ -9,12 +11,14 @@ export const stylesAppNavbar = createStyles(() => {
       overflow: "hidden",
     },
     content: {
-      width: `calc(100vw - ${MENU_SIZE.OPEN}px)`,
+      width: `calc(100vw - ${sizeNavbar}px)`,
       height: "100vh",
+      transition: "width 200ms",
     },
     navbar: {
       height: "100vh",
-      width: MENU_SIZE.OPEN,
+      width: sizeNavbar, 
+      transition: "width 200ms",
     }
   }
 })

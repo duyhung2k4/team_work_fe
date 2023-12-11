@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import MenuOption from "./Option";
 
 import { Divider, Group, Stack } from "@mantine/core";
 import { styleMenu } from "./styles";
 import { IconMenu2 } from "@tabler/icons-react";
 import { KeyMenuRouter, MENU_ROUTER } from "@/constant/router";
+import { Context } from "@/context/app.context";
+import { AppMenuTypes } from "@/context/menu/action";
 
 const AppNavbarMenu: React.FC = () => {
   const { classes, theme } = styleMenu();
+
+  const { state, dispatch } = useContext(Context);
+
+  const handleStatusMenu = () => {
+    dispatch({
+      type: state.menu.status === "open" ? AppMenuTypes.CLOSE_MENU : AppMenuTypes.OPEN_MENU
+    });
+  }
 
   return (
     <Stack className={classes.root}>
@@ -18,6 +28,7 @@ const AppNavbarMenu: React.FC = () => {
         >
           <IconMenu2 
             className={classes.icon}
+            onClick={handleStatusMenu}
           />
         </Group>
         <Divider 
