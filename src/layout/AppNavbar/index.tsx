@@ -18,13 +18,13 @@ export interface AppNavbarProps {
 const AppNavbar: React.FC<AppNavbarProps> = (props) => {
   const { state, dispatch } = useContext(Context);
   const { width } = useScreen();
-  const { classes } = stylesAppNavbar(state.menu.status);
+  const { classes } = stylesAppNavbar({ status: state.menu.status, width: width });
 
 
 
   useEffect(() => {
     dispatch({
-      type: width > 600 ? AppMenuTypes.OPEN_MENU : AppMenuTypes.CLOSE_MENU
+      type: width > 1200 ? AppMenuTypes.OPEN_MENU : AppMenuTypes.CLOSE_MENU
     })
   }, [width]);
 
@@ -38,6 +38,7 @@ const AppNavbar: React.FC<AppNavbarProps> = (props) => {
     <Group spacing={0} className={classes.root}>
       <Box className={classes.navbar}>
         <AppNavbarMenu />
+        {/* <MenuMobile/> */}
       </Box>
       <Stack spacing={0} className={classes.content}>
         <HeaderApp />

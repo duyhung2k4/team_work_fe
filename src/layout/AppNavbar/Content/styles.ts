@@ -9,7 +9,6 @@ export const stylesContent = createStyles((theme) => {
       boxSizing: "border-box",
       WebkitBoxSizing: "border-box",
       MozBoxSizing: "border-box",
-      paddingRight: 20,
     },
     content: {
       height: "100%",
