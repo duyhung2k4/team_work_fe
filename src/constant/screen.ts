@@ -1,5 +1,5 @@
 export const MENU_SIZE = {
-  OPEN: 280,
+  OPEN: 240,
   CLOSE: 80,
 }
 

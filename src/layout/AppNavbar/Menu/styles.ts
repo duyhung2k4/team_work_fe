@@ -12,6 +12,28 @@ export const styleMenu = createStyles((theme) => {
       WebkitBoxSizing: "border-box",
       MozBoxSizing: "border-box",
       paddingTop: HEIGHT_HEADER,
+    },
+    control: {
+      padding: 8,
+      paddingLeft: 16,
+    },
+    icon: {
+      cursor: "pointer",
+      color: "#96AAE0",
+      ":hover": {
+        color: theme.colors.orange[5]
+      }
+    },
+    menu: {
+      padding: 8,
+      color: "#96AAE0",
+      paddingLeft: 16,
+    },
+    option: {
+      cursor: "pointer",
+      ":hover": {
+        color: theme.colors.orange[5],
+      }
     }
   }
 })

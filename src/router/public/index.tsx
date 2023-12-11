@@ -15,16 +15,16 @@ const Public: React.FC = () => {
     loginToken(null);
   }, []);
 
-  if(profile === undefined) {
-    return <Loading/>
+  if (profile === undefined) {
+    return <Loading />
   }
 
-  if(profile !== null) {
-    return <Navigate to={ROUTER.PROTECTED.DASHBOARD.INDEX}/>
+  if (profile !== null) {
+    return <Navigate to={ROUTER.PROTECTED.DASHBOARD.INDEX} />
   }
 
   return (
-    <Outlet/>
+    <Outlet />
   )
 }
 

@@ -12,3 +12,5 @@ export const ComfirmCodeRegisterPage = lazy(() => import("@/pages/ConfirmCodeReg
 
 
 export const DashboardPage = lazy(() => import("@/pages/Dashboard"));
+export const ProjectJoinedPage = lazy(() => import("@/pages/ProjectJoined"));
+export const MyProjectPage = lazy(() => import("@/pages/MyProject"));

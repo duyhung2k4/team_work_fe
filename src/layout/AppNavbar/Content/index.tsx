@@ -10,7 +10,10 @@ const ContentApp: React.FC<ContentProps> = (props) => {
 
   return (
     <Box className={classes.root}>
-      <Stack className={classes.content}>
+      <Stack 
+        className={classes.content}
+        pos={"relative"}
+      >
         {props.children}
       </Stack>
     </Box>
