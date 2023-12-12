@@ -1,4 +1,7 @@
-import { IconArrowsJoin, IconLayoutDashboard, IconUser } from "@tabler/icons-react"
+import { 
+  IconClipboardList, 
+  IconLayoutDashboard,
+} from "@tabler/icons-react"
 
 export const ROUTER = {
   PUBLIC: {
@@ -19,22 +22,19 @@ export const ROUTER = {
     DASHBOARD: {
       INDEX: "/dashboard"
     },
-    PROJECT_JOINED: {
-      INDEX: "/project_joined"
+    PROJECT: {
+      INDEX: "/project"
     },
-    MY_PROJECT: {
-      INDEX: "/my_project"
-    }
   }
 }
 
-export type KeyRouterProtected = "DASHBOARD" | "PROJECT_JOINED" | "MY_PROJECT" | "DEFAULT";
+export type KeyRouterProtected = "DASHBOARD" | "PROJECT" | "DEFAULT";
 export interface PropKeyRouterProtected {
   INDEX: string
 }
 
 
-export type KeyMenuRouter = "DASHBOARD" | "PROJECT_JOINED" | "MY_PROJECT";
+export type KeyMenuRouter = "DASHBOARD" | "PROJECT";
 export interface PropKeyMenuRouter {
   INDEX: string
   NAME: string
@@ -46,14 +46,9 @@ export const MENU_ROUTER: Record<KeyMenuRouter, PropKeyMenuRouter> = {
     NAME: "Tổng quan",
     ICON: <IconLayoutDashboard/>
   },
-  PROJECT_JOINED: {
-    INDEX: ROUTER.PROTECTED.PROJECT_JOINED.INDEX,
-    NAME: "Dự án tham gia",
-    ICON: <IconArrowsJoin/>
+  PROJECT: {
+    INDEX: ROUTER.PROTECTED.PROJECT.INDEX,
+    NAME: "Dự án",
+    ICON: <IconClipboardList/>
   },
-  MY_PROJECT: {
-    INDEX: ROUTER.PROTECTED.MY_PROJECT.INDEX,
-    NAME: "Dự án đã tạo",
-    ICON: <IconUser/>
-  }
 }

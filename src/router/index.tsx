@@ -5,8 +5,7 @@ import {
   ComfirmCodeRegisterPage,
   DashboardPage,
   LoginPage,
-  MyProjectPage,
-  ProjectJoinedPage,
+  ProjectPage,
   ProtectedPage,
   PublicPage,
   RegisterPage,
@@ -25,14 +24,10 @@ const ROUTER_PROTECTED: Record<KeyRouterProtected, PropKeyRouterProtectedRouterP
     INDEX: ROUTER.PROTECTED.DASHBOARD.INDEX,
     ELEMENT: <DashboardPage/>
   },
-  PROJECT_JOINED: {
-    INDEX: ROUTER.PROTECTED.PROJECT_JOINED.INDEX,
-    ELEMENT: <ProjectJoinedPage/>
+  PROJECT: {
+    INDEX: ROUTER.PROTECTED.PROJECT.INDEX,
+    ELEMENT: <ProjectPage/>
   },
-  MY_PROJECT: {
-    INDEX: ROUTER.PROTECTED.MY_PROJECT.INDEX,
-    ELEMENT: <MyProjectPage/>
-  }
 }
 
 const AppRouter: React.FC = () => {
