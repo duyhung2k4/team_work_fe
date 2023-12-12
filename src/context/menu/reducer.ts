@@ -3,10 +3,12 @@ import { AppMenuAction, AppMenuTypes } from "./action";
 export type StatusMenu = "open" | "close" | "pending_set";
 export interface MenuState {
   status: StatusMenu
+  pathname: string
 }
 
 export const initMenuState: MenuState = {
-  status: "pending_set"
+  status: "pending_set",
+  pathname: "",
 }
 
 export const appMenuReducer = (state: MenuState = initMenuState, action: AppMenuAction) => {
@@ -27,6 +29,12 @@ export const appMenuReducer = (state: MenuState = initMenuState, action: AppMenu
       state = {
         ...state,
         status: "pending_set",
+      }
+      break
+    case AppMenuTypes.SET_PATHNAME:
+      state = {
+        ...state,
+        pathname: action.payload,
       }
       break
     default:

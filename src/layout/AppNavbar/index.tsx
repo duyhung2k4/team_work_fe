@@ -10,6 +10,7 @@ import { useScreen } from "@/hook/useScreen";
 import { AppMenuTypes } from "@/context/menu/action";
 import { stylesAppNavbar } from "./styles";
 import { Box, Group, Stack } from "@mantine/core";
+import MenuMobile from "./MenuMobile";
 
 
 export interface AppNavbarProps {
@@ -26,20 +27,27 @@ const AppNavbar: React.FC<AppNavbarProps> = (props) => {
     dispatch({
       type: width > 1200 ? AppMenuTypes.OPEN_MENU : AppMenuTypes.CLOSE_MENU
     })
+    dispatch({
+      type: AppMenuTypes.SET_PATHNAME,
+      payload: window.location.pathname,
+    })
   }, [width]);
 
 
-  
-  if(state.menu.status === "pending_set") {
-    return <Loading/>
+
+  if (state.menu.status === "pending_set") {
+    return <Loading />
   }
 
   return (
     <Group spacing={0} className={classes.root}>
-      <Box className={classes.navbar}>
-        <AppNavbarMenu />
-        {/* <MenuMobile/> */}
-      </Box>
+      {
+        width > 600 ?
+          <Box className={classes.navbar}>
+            <AppNavbarMenu />
+          </Box>
+          : <MenuMobile />
+      }
       <Stack spacing={0} className={classes.content}>
         <HeaderApp />
         <ContentApp>

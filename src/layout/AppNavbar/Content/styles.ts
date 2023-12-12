@@ -1,7 +1,7 @@
 import { HEIGHT_FOOTER, HEIGHT_HEADER } from "@/constant/screen";
 import { createStyles } from "@mantine/core";
 
-export const stylesContent = createStyles((theme) => {
+export const stylesContent = createStyles((theme, width: number) => {
   return {
     root: {
       height: `calc(100vh - ${HEIGHT_FOOTER + HEIGHT_HEADER}px)`,
@@ -13,7 +13,7 @@ export const stylesContent = createStyles((theme) => {
     content: {
       height: "100%",
       width: "100%",
-      borderRadius: 16,
+      borderRadius: width > 600 ? 16 : 0,
       padding: 16,
       backgroundColor: theme.colors.white[0],
       boxSizing: "border-box",

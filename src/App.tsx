@@ -1,5 +1,4 @@
 import './App.css'
-import AppContext from './context/app.context'
 import AppRouter from './router'
 
 function App() {
@@ -11,9 +10,7 @@ function App() {
         width: "100%",
       }}
     >
-      <AppContext>
-        <AppRouter/>
-      </AppContext>
+      <AppRouter/>
     </div>
   )
 }

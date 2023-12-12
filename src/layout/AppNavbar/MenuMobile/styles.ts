@@ -23,6 +23,12 @@ export const styleMenuMobileStyle = createStyles((theme) => {
         }
       },
     },
+    body: {
+      padding: `0px !important`,
+    },
+    close: {
+      display: "none",
+    },
     control: {
       padding: 8,
       paddingLeft: 16,
@@ -44,6 +50,9 @@ export const styleMenuMobileStyle = createStyles((theme) => {
       ":hover": {
         color: theme.colors.orange[5],
       }
+    },
+    header: {
+      display: "none"
     }
   }
 })

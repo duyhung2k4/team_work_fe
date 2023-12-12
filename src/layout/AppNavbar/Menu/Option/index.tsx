@@ -6,6 +6,7 @@ import { getPath } from "@/utils/path";
 import { SPACING_ICON_WIDTH_NAME_OPTION } from "@/constant/screen";
 import { Context } from "@/context/app.context";
 import { Link } from "react-router-dom";
+import { AppMenuTypes } from "@/context/menu/action";
 
 export interface MenuOptionProps {
   href: string
@@ -15,7 +16,7 @@ export interface MenuOptionProps {
 const MenuOption: React.FC<MenuOptionProps> = (props) => {
   const [active, setActive] = useState<boolean>(false);
   const { classes } = styleMenuOption();
-  const { state } = useContext(Context);
+  const { state, dispatch } = useContext(Context);
 
   const navigation = useNavigate();
   const url = getPath().url;
@@ -24,11 +25,19 @@ const MenuOption: React.FC<MenuOptionProps> = (props) => {
     setActive(props.href === url ? true : false);
   }, [url]);
 
+  const handleNavigate = () => {
+    navigation(props.href);
+    dispatch({
+      type: AppMenuTypes.SET_PATHNAME,
+      payload: props.href,
+    });
+  }
+
   return (
     <Group 
       spacing={SPACING_ICON_WIDTH_NAME_OPTION} 
       className={`${classes.root} ${active ? classes.active : ""}`}
-      onClick={() => navigation(props.href)}
+      onClick={handleNavigate}
     >
       <Box className={classes.icon}>
         {props.icon}
