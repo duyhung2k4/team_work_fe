@@ -28,7 +28,7 @@ export const themeGlobal: MantineThemeOverride = {
     info: [
       "#BDCAF2",
       "#96AAE0",
-      "#80d1fe",
+      "#EBF0FF",
       "#6bcafe",
       "#56c2fd",
       "#41bbfd",

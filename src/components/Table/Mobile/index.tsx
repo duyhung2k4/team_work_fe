@@ -30,6 +30,7 @@ export const TableScreenMobile: React.FC<TableCustomProps> = (props) => {
               key={index}
               record={r}
               field={props.columns}
+              onClick={props.onRowClick}
             />
           )}
       </Stack>

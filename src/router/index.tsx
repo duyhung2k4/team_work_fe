@@ -9,6 +9,7 @@ import {
   ProtectedPage,
   PublicPage,
   RegisterPage,
+  TaskPage,
 } from "./page";
 import Loading from "@/layout/Loading";
 
@@ -28,6 +29,10 @@ const ROUTER_PROTECTED: Record<KeyRouterProtected, PropKeyRouterProtectedRouterP
     INDEX: ROUTER.PROTECTED.PROJECT.INDEX,
     ELEMENT: <ProjectPage/>
   },
+  TASK: {
+    INDEX: ROUTER.PROTECTED.TASK.INDEX,
+    ELEMENT: <TaskPage/>
+  }
 }
 
 const AppRouter: React.FC = () => {

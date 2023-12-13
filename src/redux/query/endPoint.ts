@@ -1,5 +1,6 @@
 import { HEADER } from "@/constant/header";
 import { METHOD } from "@/constant/method";
+import { AddAccountRequest, FindAccountRequest } from "@/dto/request/account.request";
 import { LoginRequest } from "@/dto/request/login.request";
 import { RequestCreateProject } from "@/dto/request/project.request";
 import { RequestConfirmCodeRegister, RequestSendInfoRegister } from "@/dto/request/register.request";
@@ -52,5 +53,25 @@ export const endPoint = {
       method: METHOD.GET,
       headers: HEADER.protected("query"),
     }),
+
+    findAccount: (data: FindAccountRequest) => ({
+      url: "/api/v1/protected/account/get_account",
+      method: METHOD.POST,
+      headers: HEADER.protected("query"),
+      data,
+    }),
+
+    getUserProject: (projecyId: number) => ({
+      url: `/api/v1/protected/account/get_account_project/${projecyId}`,
+      method: METHOD.GET,
+      headers: HEADER.protected("query"),
+    }),
+
+    addAccount: (data: AddAccountRequest) => ({
+      url: "/api/v1/protected/account/add_to_project",
+      method: METHOD.POST,
+      headers: HEADER.protected("query"),
+      data,
+    })
   }
 }

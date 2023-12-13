@@ -10,6 +10,7 @@ export interface TableCustomProps {
   records: any[];
   onCreate?: () => void
   onReload?: () => void
+  onRowClick?: (record: any) => void
   loading?: boolean
 }
 const TableCustom: React.FC<TableCustomProps> = (props) => {

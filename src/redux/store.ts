@@ -3,11 +3,13 @@ import { reducer } from "./reducer";
 import { registerApi } from "./query/api/register.api";
 import { loginApi } from "./query/api/login.api";
 import { projectApi } from "./query/api/project";
+import { accountApi } from "./query/api/account.api";
 
 const appMiddleware = [
   registerApi.middleware, 
   loginApi.middleware,
   projectApi.middleware,
+  accountApi.middleware,
 ];
 
 export const store = configureStore({

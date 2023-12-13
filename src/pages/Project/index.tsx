@@ -10,6 +10,8 @@ import { FORM_ID } from "@/form/form.id";
 import { useGetProjectCreateQuery, useGetProjectJoinedQuery } from "@/redux/query/api/project";
 import { ProjectModel } from "@/model/project";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router";
+import { ROUTER } from "@/constant/router";
 
 const Project: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -73,6 +75,9 @@ const Project: React.FC = () => {
     }
   ]
 
+
+  const navigation = useNavigate();
+
   const loading = useMemo(() => {
     return fetchingProjectCreate || fetchingProjectJoined;
   }, [fetchingProjectCreate, fetchingProjectJoined]);
@@ -94,7 +99,14 @@ const Project: React.FC = () => {
     refetchProjectJoined();
   }
 
+  const handleNavigationTask = (record: ProjectModel) => {
+    if(!record.id) {
+      return;
+    }
 
+    const url = ROUTER.PROTECTED.TASK.INDEX.replace(":project_id", `${record.id}`);
+    navigation(url);
+  }
 
   return (
     <Box
@@ -108,6 +120,7 @@ const Project: React.FC = () => {
         records={records}
         onCreate={() => setOpen(true)}
         onReload={handleRefetch}
+        onRowClick={handleNavigationTask}
         loading={loading}
       />
       <DrawerCustom

@@ -6,6 +6,7 @@ import { styleTableScreenMobileCard } from "./styles";
 export interface TableScreenMobileCardProps {
   record: Record<string, any>
   field: DataTableColumn<any>[]
+  onClick?: (record: any) => void
 }
 export const TableScreenMobileCard: React.FC<TableScreenMobileCardProps> = (props) => {
   const { classes } = styleTableScreenMobileCard();
@@ -14,6 +15,9 @@ export const TableScreenMobileCard: React.FC<TableScreenMobileCardProps> = (prop
     <Stack
       spacing={0}
       className={classes.root}
+      onClick={() => {
+        props.onClick && props.onClick(props.record)
+      }}
     >
       <Group
         position="apart"

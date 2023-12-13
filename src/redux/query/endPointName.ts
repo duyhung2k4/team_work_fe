@@ -12,7 +12,11 @@ export enum END_POINT_NAME {
 
   PROJECT_CREATE = "createProject",
   PROJECT_GET_CREATE = "getProjectCreate",
-  PROJECT_GET_JOINED = "getProjectJoined"
+  PROJECT_GET_JOINED = "getProjectJoined",
+
+  ACCOUNT_FIND_ACCOUNT = "findAccount",
+  ACCOUNT_ADD_ACCOUNT = "addAccount",
+  ACCOUNT_GET_USER_PROJECT = "getUserProject",
 }
 
 export enum STATUS {
@@ -33,7 +37,12 @@ export const endPointName = {
   },
   project: {
     createProject: { name: END_POINT_NAME.PROJECT_CREATE, type: TYPE_API.mutation },
-    getProjectCreate: { name: END_POINT_NAME.PROJECT_GET_CREATE, type: TYPE_API.mutation },
-    getProjectJoined: { name: END_POINT_NAME.PROJECT_GET_JOINED, type: TYPE_API.mutation },
+    getProjectCreate: { name: END_POINT_NAME.PROJECT_GET_CREATE, type: TYPE_API.query },
+    getProjectJoined: { name: END_POINT_NAME.PROJECT_GET_JOINED, type: TYPE_API.query },
+  },
+  account: {
+    findAccount: { name: END_POINT_NAME.ACCOUNT_FIND_ACCOUNT, type: TYPE_API.mutation },
+    addAccount: { name: END_POINT_NAME.ACCOUNT_ADD_ACCOUNT, type: TYPE_API.mutation },
+    getUserProject: { name: END_POINT_NAME.ACCOUNT_GET_USER_PROJECT, type: TYPE_API.mutation },
   }
 }

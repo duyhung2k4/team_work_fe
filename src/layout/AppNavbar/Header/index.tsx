@@ -43,7 +43,7 @@ const HeaderApp: React.FC = () => {
       >
         <IconMenu2/>
       </Box>
-      <Text>{nameOption}</Text>
+      <Text></Text>
       <Box>
         <IconUserCircle 
           style={{ 

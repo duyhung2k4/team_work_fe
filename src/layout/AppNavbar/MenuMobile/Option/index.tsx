@@ -22,7 +22,7 @@ const MenuMobileOption: React.FC<MenuMobileOptionProps> = (props) => {
   const url = getPath().url;
 
   useEffect(() => {
-    setActive(props.href === url ? true : false);
+    setActive(url.includes(props.href) ? true : false);
   }, [url]);
 
   const handleNavigate = () => {

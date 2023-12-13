@@ -25,10 +25,13 @@ export const ROUTER = {
     PROJECT: {
       INDEX: "/project"
     },
+    TASK: {
+      INDEX: "/project/:project_id/task"
+    }
   }
 }
 
-export type KeyRouterProtected = "DASHBOARD" | "PROJECT" | "DEFAULT";
+export type KeyRouterProtected = "DASHBOARD" | "PROJECT" | "DEFAULT" | "TASK";
 export interface PropKeyRouterProtected {
   INDEX: string
 }
