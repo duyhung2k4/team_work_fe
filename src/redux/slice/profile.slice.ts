@@ -9,7 +9,8 @@ interface ProfileState {
   credential?: CredentialModel | null
 }
 
-const initialState: ProfileState = {}
+const initialState: ProfileState = {
+}
 
 export const profileSlice = createSlice({
   name: "profile",

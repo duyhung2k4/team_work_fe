@@ -1,6 +1,7 @@
 import { HEADER } from "@/constant/header";
 import { METHOD } from "@/constant/method";
 import { LoginRequest } from "@/dto/request/login.request";
+import { RequestCreateProject } from "@/dto/request/project.request";
 import { RequestConfirmCodeRegister, RequestSendInfoRegister } from "@/dto/request/register.request";
 import { AxiosRequestConfig } from "axios";
 
@@ -31,6 +32,25 @@ export const endPoint = {
       url: "/api/v1/protected/login_token",
       method: METHOD.POST,
       headers: HEADER.protected("refresh"),
-    })
+    }),
+
+    createProject: (data: RequestCreateProject) => ({
+      url: "/api/v1/protected/project/create",
+      method: METHOD.POST,
+      headers: HEADER.protected("query"),
+      data,
+    }),
+
+    getProjectCreate: () => ({
+      url: "/api/v1/protected/project/creater_id",
+      method: METHOD.GET,
+      headers: HEADER.protected("query"),
+    }),
+
+    getProjectJoined: () => ({
+      url: "/api/v1/protected/project/joined",
+      method: METHOD.GET,
+      headers: HEADER.protected("query"),
+    }),
   }
 }

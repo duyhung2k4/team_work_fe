@@ -77,9 +77,6 @@ export const themeGlobal: MantineThemeOverride = {
   components: {
     InputWrapper: {
       styles: {
-        root: {
-          height: 40,
-        },
         label: {
           marginBottom: "2px",
           display: "block",

@@ -8,7 +8,11 @@ export enum END_POINT_NAME {
   REGISTER_CONFIRM_CODE = "confirmCodeRegister",
 
   LOGIN_INFO = "loginInfo",
-  LOGIN_TOKEN = "loginToken"
+  LOGIN_TOKEN = "loginToken",
+
+  PROJECT_CREATE = "createProject",
+  PROJECT_GET_CREATE = "getProjectCreate",
+  PROJECT_GET_JOINED = "getProjectJoined"
 }
 
 export enum STATUS {
@@ -26,5 +30,10 @@ export const endPointName = {
   login: {
     loginInfo: { name: END_POINT_NAME.LOGIN_INFO, type: TYPE_API.mutation },
     loginToken: { name: END_POINT_NAME.LOGIN_TOKEN, type: TYPE_API.mutation },
+  },
+  project: {
+    createProject: { name: END_POINT_NAME.PROJECT_CREATE, type: TYPE_API.mutation },
+    getProjectCreate: { name: END_POINT_NAME.PROJECT_GET_CREATE, type: TYPE_API.mutation },
+    getProjectJoined: { name: END_POINT_NAME.PROJECT_GET_JOINED, type: TYPE_API.mutation },
   }
 }

@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { reducer } from "./reducer";
 import { registerApi } from "./query/api/register.api";
 import { loginApi } from "./query/api/login.api";
+import { projectApi } from "./query/api/project";
 
 const appMiddleware = [
   registerApi.middleware, 
   loginApi.middleware,
+  projectApi.middleware,
 ];
 
 export const store = configureStore({
