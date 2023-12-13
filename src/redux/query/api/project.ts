@@ -21,11 +21,21 @@ export const projectApi = createApi({
       query: () => endPoint.protected.getProjectJoined(),
     }),
 
+    getProjectCreateDetail: builder.query<QueryReturnType<ProjectModel>, number>({
+      query: (payload) => endPoint.protected.getProjectCreateDetail(payload),
+    }),
+
+    getProjectJoinedDetail: builder.query<QueryReturnType<ProjectModel>, number>({
+      query: (payload) => endPoint.protected.getProjectJoinedDetail(payload),
+    }),
+
   })
 })
 
 export const { 
   useGetProjectCreateQuery,
   useGetProjectJoinedQuery,
+  useGetProjectJoinedDetailQuery,
+  useGetProjectCreateDetailQuery,
   useCreateProjectMutation,
 } = projectApi;

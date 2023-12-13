@@ -1,11 +1,13 @@
 import { Box, Group } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 import { stylesFooter } from "./styles";
 import { useScreen } from "@/hook/useScreen";
 import { IconUserCircle } from "@tabler/icons-react";
 import { SIZE_ICON_MENU } from "@/constant/screen";
+import { DrawerAccountInfo } from "../DrawerInfo";
 
 const FooterApp: React.FC = () => {
+  const [showInfo, setShowInfo] = useState<boolean>(false);
   const { width } = useScreen();
   const { classes } = stylesFooter(width);
 
@@ -27,8 +29,14 @@ const FooterApp: React.FC = () => {
             display: width > 600 ? "none" : undefined,
             cursor: "pointer",
           }}
+          onClick={() => setShowInfo(true)}
         />
       </Box>
+
+      <DrawerAccountInfo
+        opened={showInfo}
+        setStatus={setShowInfo}
+      />
     </Group>
   )
 }

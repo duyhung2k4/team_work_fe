@@ -1,9 +1,10 @@
 import React from "react";
-import { 
-  Button, 
-  Drawer, 
-  Group, 
-  LoadingOverlay, 
+import {
+  Box,
+  Button,
+  Drawer,
+  Group,
+  LoadingOverlay,
   Stack,
 } from "@mantine/core";
 import { styleDrawerCustom } from "./styles";
@@ -18,6 +19,7 @@ export interface DrawerCustomProps {
   children: React.ReactNode
   loading?: boolean
   formId?: string
+  onClose?: () => void
 }
 const DrawerCustom: React.FC<DrawerCustomProps> = (props) => {
   const { classes } = styleDrawerCustom();
@@ -30,20 +32,30 @@ const DrawerCustom: React.FC<DrawerCustomProps> = (props) => {
         body: classes.body,
       }}
       opened={props.opened}
-      onClose={() => props.setStatus(false)}
+      onClose={() => {
+        props.setStatus(false);
+        props.onClose && props.onClose();
+      }}
       title={props.title}
       position="right"
     >
-      <LoadingOverlay 
+      <LoadingOverlay
         visible={status === STATUS.PENDING ? true : false}
       />
-      <Stack 
+      <Stack
         justify="space-between"
         style={{
-          minHeight: `calc(100vh - ${HEIGHT_HEADER + 20 + 16}px)`
+          height: `calc(100vh - ${HEIGHT_HEADER + 20 + 16}px)`,
         }}
       >
-        {props.children}
+        <Box
+          style={{
+            height: `calc(100vh - ${HEIGHT_HEADER + 20 + 16 + 40}px)`,
+            overflowY: "scroll",
+          }}
+        >
+          {props.children}
+        </Box>
         <Group position="right">
           <Button
             onClick={() => props.setStatus(false)}

@@ -3,4 +3,5 @@ export const FORM_ID = {
   CONFIRM_CODE_REGISTER: "confirm_code_register",
   LOGIN: "login",
   CREATE_PROJECT: "create_project",
+  CREATE_TASK: "create_task",
 }

@@ -72,7 +72,6 @@ const SearchMember: React.FC<SearchMemberProps> = (props) => {
     }
 
     let listAccountNotInProject: CredentialModel[] = [];
-    console.log(credentialState);
     result.data.data.forEach((credential) => {
       let checkExist = false;
       

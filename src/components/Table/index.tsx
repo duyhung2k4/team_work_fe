@@ -8,10 +8,13 @@ import { TableScreenMobile } from "./Mobile";
 export interface TableCustomProps {
   columns: DataTableColumn<any>[];
   records: any[];
+  placeholderSearch: string
+  textButtonCreate: string
   onCreate?: () => void
   onReload?: () => void
   onRowClick?: (record: any) => void
   loading?: boolean
+  pinLastColumn?: boolean
 }
 const TableCustom: React.FC<TableCustomProps> = (props) => {
   const { width } = useScreen();

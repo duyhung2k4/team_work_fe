@@ -6,7 +6,7 @@ import SearchMember from "./Search";
 
 import { IconUserPlus } from "@tabler/icons-react";
 import { useScreen } from "@/hook/useScreen";
-import { Box, Button, Grid, Group, Text } from "@mantine/core";
+import { Box, Button, Grid, Group, Text, Tooltip } from "@mantine/core";
 import { useGetUserProjectQuery } from "@/redux/query/api/account.api";
 import { useParams } from "react-router";
 import { useAppSelector } from "@/redux/hook";
@@ -19,6 +19,7 @@ const Member: React.FC = () => {
   const { width } = useScreen();
   const [open, setOpen] = useState<boolean>(false);
   const { project_id } = useParams();
+  const projectCreateDetail = useAppSelector((state: RootState) => state.project.projectCreatedDetail);
 
   const userOfProjects: UserProject[] | null = useAppSelector((state: RootState) => state.project.userOfProject);
 
@@ -48,16 +49,21 @@ const Member: React.FC = () => {
       >
         <Group position="apart">
           <Text>Danh sách thành viên</Text>
-          <Box onClick={() => setOpen(true)}>
-            {
-              width > 600 ?
+          <Box 
+            onClick={() => setOpen(true)}
+          >
+            {projectCreateDetail &&
+              (width > 600 ?
                 <Button
                   leftIcon={<IconUserPlus />}
                 >Thêm mới thành viên</Button>
                 :
-                <Button>
-                  <IconUserPlus />
-                </Button>
+                <Tooltip label="Thêm mới thành viên">
+                  <Button>
+                    <IconUserPlus />
+                  </Button>
+                </Tooltip>
+              )
             }
           </Box>
         </Group>

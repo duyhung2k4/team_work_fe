@@ -122,6 +122,8 @@ const Project: React.FC = () => {
         onReload={handleRefetch}
         onRowClick={handleNavigationTask}
         loading={loading}
+        placeholderSearch="Tên dự án"
+        textButtonCreate="Thêm một dự án"
       />
       <DrawerCustom
         opened={open}

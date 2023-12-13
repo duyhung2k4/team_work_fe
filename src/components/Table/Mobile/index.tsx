@@ -1,12 +1,15 @@
 import React from "react";
 import { TableCustomProps } from "..";
-import { Group, LoadingOverlay, Stack, TextInput, Tooltip } from "@mantine/core";
+import { Button, Group, LoadingOverlay, Stack, TextInput, Tooltip } from "@mantine/core";
 import { TableScreenMobileCard } from "./Card";
 import { IconLayoutGridAdd, IconReload, IconSearch } from "@tabler/icons-react";
 import { styleTableScreenMobile } from "./styles";
+import { useScreen } from "@/hook/useScreen";
 
 export const TableScreenMobile: React.FC<TableCustomProps> = (props) => {
   const { classes } = styleTableScreenMobile();
+  const { width } = useScreen();
+  const sizeIcon = width <= 600 ? 14 : undefined;
 
   return (
     <Stack
@@ -47,24 +50,31 @@ export const TableScreenMobile: React.FC<TableCustomProps> = (props) => {
             input: classes.input,
           }}
           icon={<IconSearch size={22} />}
-          placeholder="Tên dự án"
+          placeholder={props.placeholderSearch}
         />
         <Group>
           <Tooltip label="Làm mới">
-            <IconReload
-              onClick={props.onReload}
-              style={{
-                cursor: "pointer"
-              }}
-            />
+            <Button onClick={props.onReload}>
+              <IconReload
+                style={{
+                  cursor: "pointer"
+                }}
+                size={sizeIcon}
+              />
+            </Button>
           </Tooltip>
-          <Tooltip label="Thêm một dự án">
-            <IconLayoutGridAdd
+          <Tooltip label={props.textButtonCreate}>
+            <Button 
               onClick={props.onCreate}
-              style={{
-                cursor: "pointer"
-              }}
-            />
+              display={props.onCreate ? undefined : "none"}
+            >
+              <IconLayoutGridAdd
+                style={{
+                  cursor: "pointer"
+                }}
+                size={sizeIcon}
+              />
+            </Button>
           </Tooltip>
         </Group>
       </Group>

@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Tabs } from '@mantine/core';
 import { 
   IconMessageCircle, 
   IconSettings, 
   IconSubtask,
 } from '@tabler/icons-react';
-import { styleTask } from "./styles";
+import Loading from "@/layout/Loading";
 import Member from "./Member";
+
+import { styleTask } from "./styles";
+import { useGetProjectJoinedDetailQuery, useGetProjectCreateDetailQuery } from "@/redux/query/api/project";
+import { useParams } from "react-router";
+import ManageTask from "./ManageTask";
 
 const Task: React.FC = () => {
   const { classes } = styleTask();
+  const { project_id } = useParams();
+
+  if(project_id === undefined) {
+    return <Loading/>
+  }
+
+  const { refetch: refetchJoined } = useGetProjectJoinedDetailQuery(Number(project_id));
+  const { refetch: reftchCreated } = useGetProjectCreateDetailQuery(Number(project_id));
+
+  useEffect(() => {
+    refetchJoined();
+    reftchCreated();
+  }, []);
 
   return (
     <Tabs 
@@ -30,7 +48,7 @@ const Task: React.FC = () => {
       </Tabs.List>
 
       <Tabs.Panel value="task" pt="xs">
-        Gallery tab content
+        <ManageTask/>
       </Tabs.Panel>
 
       <Tabs.Panel value="member" pt="xs">

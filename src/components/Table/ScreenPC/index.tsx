@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Group, LoadingOverlay, TextInput, Tooltip } from "@mantine/core";
+import { Box, Button, Group, LoadingOverlay, TextInput, Tooltip } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import { IconLayoutGridAdd, IconReload, IconSearch } from "@tabler/icons-react";
 import { styleTableCustom } from "./styled";
@@ -33,24 +33,29 @@ export const TableScreenPC: React.FC<TableCustomProps> = (props) => {
             input: classes.input,
           }}
           icon={<IconSearch size={22} />}
-          placeholder="Tên dự án"
+          placeholder={props.placeholderSearch}
         />
         <Group>
           <Tooltip label="Làm mới">
-            <IconReload
-              onClick={props.onReload}
-              style={{
-                cursor: "pointer"
-              }}
-            />
+            <Button onClick={props.onReload}>
+              <IconReload
+                style={{
+                  cursor: "pointer"
+                }}
+              />
+            </Button>
           </Tooltip>
-          <Tooltip label="Thêm một dự án">
-            <IconLayoutGridAdd
+          <Tooltip label={props.textButtonCreate}>
+            <Button 
               onClick={props.onCreate}
-              style={{
-                cursor: "pointer"
-              }}
-            />
+              display={props.onCreate ? undefined : "none"}
+            >
+              <IconLayoutGridAdd
+                style={{
+                  cursor: "pointer"
+                }}
+              />
+            </Button>
           </Tooltip>
         </Group>
       </Group>
@@ -63,6 +68,7 @@ export const TableScreenPC: React.FC<TableCustomProps> = (props) => {
         rowStyle={{
           cursor: "pointer",
         }}
+        pinLastColumn={props.pinLastColumn}
         onRowClick={props.onRowClick}
         columns={props.columns}
         records={props.records}

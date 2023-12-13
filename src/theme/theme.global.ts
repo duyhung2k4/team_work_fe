@@ -101,6 +101,13 @@ export const themeGlobal: MantineThemeOverride = {
         },
       }
     },
+    Textarea: {
+      styles: {
+        input: {
+          height: "auto !important",
+        }
+      }
+    },
     PasswordInput: {
       styles: {
         innerInput: {

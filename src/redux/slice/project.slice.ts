@@ -7,7 +7,9 @@ import { UserProject } from "@/dto/response/project";
 interface ProjectState {
   projectCreater: ProjectModel[]
   projectJoined: ProjectModel[],
-  userOfProject: UserProject[] | null
+  userOfProject: UserProject[] | null,
+  projectJoinedDetail?: ProjectModel,
+  projectCreatedDetail?: ProjectModel,
 }
 
 const initialState: ProjectState = {
@@ -37,6 +39,22 @@ export const projectSlice = createSlice({
 
     builder.addMatcher(accountApi.endpoints.getUserProject.matchFulfilled, (state, { payload }) => {
       state.userOfProject = payload.data || [];
+    })
+
+    builder.addMatcher(projectApi.endpoints.getProjectJoinedDetail.matchFulfilled, (state, { payload }) => {
+      if(payload.data === null) {
+        return
+      }
+      state.projectJoinedDetail = payload.data;
+      state.projectCreatedDetail = undefined;
+    })
+
+    builder.addMatcher(projectApi.endpoints.getProjectCreateDetail.matchFulfilled, (state, { payload }) => {
+      if(payload.data === null) {
+        return
+      }
+      state.projectJoinedDetail = undefined;
+      state.projectCreatedDetail = payload.data;
     })
   }
 }) 
