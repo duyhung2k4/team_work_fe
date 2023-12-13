@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import DrawerCustom from "@/components/DrawerCustom";
 import FormTask from "@/form/task";
 import TableCustom from "@/components/Table";
@@ -8,7 +8,7 @@ import { useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { Box, Group, Text, Tooltip } from "@mantine/core";
 import { FORM_ID } from "@/form/form.id";
-import { useGetTaskQuery } from "@/redux/query/api/task";
+import { useGetAllUserTaskQuery, useGetTaskQuery } from "@/redux/query/api/task";
 import { DataTableColumn } from "mantine-datatable";
 import { LEVEL_OBJECT_UPPER, STATUS_OBJECT_UPPER, TaskModel } from "@/model/task";
 import { IconAddressBook } from "@tabler/icons-react";
@@ -19,16 +19,44 @@ import FormAddUserTask from "@/form/addUserTask";
 const ManagerTask: React.FC = () => {
   const projectCreateDetail = useAppSelector((state: RootState) => state.project.projectCreatedDetail);
   const projectJoinedDetail = useAppSelector((state: RootState) => state.project.projectJoinedDetail);
+  const user = useAppSelector((state: RootState) => state.profile.credential);
 
   const [open, setOpen] = useState<boolean>(false);
   const [addUser, setAddUser] = useState<boolean>(false);
   const [defaultTask, setDefaultTask] = useState<TaskModel | undefined>(undefined);
 
   const {
-    data,
+    data: dataFetch,
     refetch,
     isFetching,
   } = useGetTaskQuery(projectCreateDetail?.id || projectJoinedDetail?.id || 0);
+  const taskOfProject = dataFetch?.data || [];
+
+  const {
+    data: dataAllFetch,
+    refetch: refetchAll,
+  } = useGetAllUserTaskQuery(null);
+  const allTaskProfile = dataAllFetch?.data || [];
+
+  const record = useMemo(() => {
+    if(projectCreateDetail !== undefined) {
+      return taskOfProject;
+    }
+
+    const listData: TaskModel[] = [];
+    for(let i = 0; i < taskOfProject.length; i++) {
+      for(let j = 0; j < allTaskProfile.length; j++) {
+        if(
+          allTaskProfile[j].implementerId === user?.profileId && 
+          allTaskProfile[j].taskId === taskOfProject[i].id
+        ) {
+          listData.push(taskOfProject[i]);
+          break;
+        }
+      }
+    }
+    return listData;
+  }, [taskOfProject, allTaskProfile])
 
   const colums: DataTableColumn<TaskModel>[] = [
     {
@@ -147,9 +175,12 @@ const ManagerTask: React.FC = () => {
     >
       <TableCustom
         columns={colums}
-        records={data?.data || []}
+        records={record}
         onCreate={projectCreateDetail !== undefined ? () => setOpen(true) : undefined}
-        onReload={refetch}
+        onReload={() => {
+          refetch();
+          refetchAll();
+        }}
         onRowClick={(record) => {
           if (!addUser) {
             setDefaultTask(record as TaskModel);
@@ -162,7 +193,6 @@ const ManagerTask: React.FC = () => {
         textButtonCreate="Thêm một tác vụ"
       />
 
-
       <DrawerCustom
         opened={open}
         setStatus={setOpen}
@@ -174,6 +204,7 @@ const ManagerTask: React.FC = () => {
           cb={() => {
             setOpen(false);
             refetch();
+            refetchAll();
           }}
           defaultValue={defaultTask}
         />
@@ -187,6 +218,7 @@ const ManagerTask: React.FC = () => {
         }}
         title={"Giao tác vụ"}
         formId={FORM_ID.CREATE_TASK}
+        showFooter={false}
       >
         <FormAddUserTask
           task={defaultTask}

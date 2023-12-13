@@ -111,7 +111,7 @@ const FormTask: React.FC<FormTaskProps> = (props) => {
     }
   }
 
-  const isOwnerProject = props.defaultValue?.createrId === user.profileId ? true : false;
+  const isOwnerProject = props.defaultValue === undefined ? true : (props.defaultValue.createrId === user.profileId ? true : false);
 
   return (
     <form 

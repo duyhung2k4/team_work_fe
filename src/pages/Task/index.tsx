@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box, Group, Tabs } from '@mantine/core';
+import { Box, Group, Tabs, Text } from '@mantine/core';
 import {
   IconMessageCircle,
   IconSettings,
@@ -14,11 +14,17 @@ import { useGetProjectJoinedDetailQuery, useGetProjectCreateDetailQuery } from "
 import { useNavigate, useParams } from "react-router";
 import ManageTask from "./ManageTask";
 import { ROUTER } from "@/constant/router";
+import { useAppSelector } from "@/redux/hook";
+import { RootState } from "@/redux/store";
 
 const Task: React.FC = () => {
   const { classes } = styleTask();
   const { project_id } = useParams();
   const navigate = useNavigate();
+
+  const projectCreateDetail = useAppSelector((state: RootState) => state.project.projectCreatedDetail);
+  const projectJoinedDetail = useAppSelector((state: RootState) => state.project.projectJoinedDetail);
+  const project = projectCreateDetail || projectJoinedDetail;
 
   if (project_id === undefined) {
     return <Loading />
@@ -34,7 +40,12 @@ const Task: React.FC = () => {
 
   return (
     <Box h={"100%"}>
-      <Group position="right">
+      <Group position="apart">
+        <Text>
+          <span style={{ fontWeight: 600 }}>Tên dự án:</span> {project?.name}
+          &nbsp;/&nbsp; 
+          <span style={{ fontWeight: 600 }}>Mã dự án:</span> {project?.code}
+        </Text>
         <IconX
           style={{
             cursor: "pointer",

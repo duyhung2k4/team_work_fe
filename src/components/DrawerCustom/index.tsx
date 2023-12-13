@@ -20,6 +20,7 @@ export interface DrawerCustomProps {
   loading?: boolean
   formId?: string
   onClose?: () => void
+  showFooter?: boolean
 }
 const DrawerCustom: React.FC<DrawerCustomProps> = (props) => {
   const { classes } = styleDrawerCustom();
@@ -56,15 +57,19 @@ const DrawerCustom: React.FC<DrawerCustomProps> = (props) => {
         >
           {props.children}
         </Box>
-        <Group position="right">
-          <Button
-            onClick={() => props.setStatus(false)}
-          >Hủy</Button>
-          <Button
-            type="submit"
-            form={props.formId}
-          >Xác nhận</Button>
-        </Group>
+        {
+          props.showFooter === true || props.showFooter === undefined ?
+            <Group position="right">
+              <Button
+                onClick={() => props.setStatus(false)}
+              >Hủy</Button>
+              <Button
+                type="submit"
+                form={props.formId}
+              >Xác nhận</Button>
+            </Group>
+            : ""
+        }
       </Stack>
     </Drawer>
   )
