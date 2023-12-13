@@ -100,7 +100,7 @@ const Project: React.FC = () => {
   }
 
   const handleNavigationTask = (record: ProjectModel) => {
-    if(!record.id) {
+    if (!record.id) {
       return;
     }
 

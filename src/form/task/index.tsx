@@ -111,6 +111,8 @@ const FormTask: React.FC<FormTaskProps> = (props) => {
     }
   }
 
+  const isOwnerProject = props.defaultValue?.createrId === user.profileId ? true : false;
+
   return (
     <form 
       id={FORM_ID.CREATE_TASK}
@@ -122,12 +124,14 @@ const FormTask: React.FC<FormTaskProps> = (props) => {
           withAsterisk
           label="Tên tác vụ"
           placeholder="Tên tác vụ"
+          readOnly={!isOwnerProject}
           {...form.getInputProps("name")}
         />
         <Select
           withAsterisk
           label="Độ ưu tiên"
           placeholder="Độ ưu tiên"
+          readOnly={!isOwnerProject}
           data={Object.keys(LEVEL_OBJECT).map((key: string) => ({
             label: LEVEL_OBJECT[key as LEVEL_OBJECT_KEY],
             value: LEVEL[key as LEVEL_OBJECT_KEY]
@@ -151,6 +155,7 @@ const FormTask: React.FC<FormTaskProps> = (props) => {
           yearLabelFormat="YYYY"
           monthLabelFormat="MM-YYYY"
           label="Ngày kết thúc"
+          readOnly={!isOwnerProject}
           placeholder="Ngày kết thúc"
           icon={<IconCalendar />}
           {...form.getInputProps("finishAt")}
@@ -158,11 +163,13 @@ const FormTask: React.FC<FormTaskProps> = (props) => {
         <TimeInput
           label="Giờ kết thúc"
           placeholder="Giờ kết thúc"
+          readOnly={!isOwnerProject}
           {...form.getInputProps("timeFinishAt")}
         />
         <Textarea
           label="Mô tả"
           placeholder="Mô tả"
+          readOnly={!isOwnerProject}
           styles={{
             input: {
               height: "120px !important"

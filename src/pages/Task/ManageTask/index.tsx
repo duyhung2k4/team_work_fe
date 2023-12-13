@@ -18,7 +18,8 @@ import FormAddUserTask from "@/form/addUserTask";
 
 const ManagerTask: React.FC = () => {
   const projectCreateDetail = useAppSelector((state: RootState) => state.project.projectCreatedDetail);
-  
+  const projectJoinedDetail = useAppSelector((state: RootState) => state.project.projectJoinedDetail);
+
   const [open, setOpen] = useState<boolean>(false);
   const [addUser, setAddUser] = useState<boolean>(false);
   const [defaultTask, setDefaultTask] = useState<TaskModel | undefined>(undefined);
@@ -27,7 +28,7 @@ const ManagerTask: React.FC = () => {
     data,
     refetch,
     isFetching,
-  } = useGetTaskQuery(projectCreateDetail?.id || 0);
+  } = useGetTaskQuery(projectCreateDetail?.id || projectJoinedDetail?.id || 0);
 
   const colums: DataTableColumn<TaskModel>[] = [
     {
@@ -69,10 +70,10 @@ const ManagerTask: React.FC = () => {
       title: "Ngày kết thúc",
       width: 200,
       ellipsis: true,
-      render: (record, index) => 
+      render: (record, index) =>
         <Text key={index}>{
-          dayjs(record.finishAt).format("YYYY") === "0001" ? "" : 
-          dayjs(record.finishAt).format("DD/MM/YYYY-HH:mm")
+          dayjs(record.finishAt).format("YYYY") === "0001" ? "" :
+            dayjs(record.finishAt).format("DD/MM/YYYY-HH:mm")
         }</Text>
     },
     {
@@ -94,8 +95,8 @@ const ManagerTask: React.FC = () => {
       title: "Mô tả",
       width: 200,
       render: (record, index) => (
-        <Tooltip 
-          key={index} 
+        <Tooltip
+          key={index}
           label={record.detail}
         >
           <Text
@@ -108,14 +109,17 @@ const ManagerTask: React.FC = () => {
         </Tooltip>
       )
     },
-    {
+  ]
+
+  if (projectCreateDetail !== undefined) {
+    colums.push({
       accessor: "action",
       title: "Thao tác",
       textAlignment: "center",
       width: 150,
       render: (_, index) => {
         return (
-          <Group 
+          <Group
             position="center" key={index}
             onClick={() => {
               setAddUser(true);
@@ -125,11 +129,11 @@ const ManagerTask: React.FC = () => {
           </Group>
         )
       }
-    }
-  ]
+    })
+  }
 
   useEffect(() => {
-    if(addUser) {
+    if (addUser) {
       setOpen(false);
     }
   }, [addUser]);
@@ -147,12 +151,12 @@ const ManagerTask: React.FC = () => {
         onCreate={projectCreateDetail !== undefined ? () => setOpen(true) : undefined}
         onReload={refetch}
         onRowClick={(record) => {
-          if(!addUser) {
+          if (!addUser) {
             setDefaultTask(record as TaskModel);
             setOpen(true);
           }
         }}
-        pinLastColumn
+        pinLastColumn={projectCreateDetail ? true : false}
         loading={isFetching}
         placeholderSearch="Tên tác vụ"
         textButtonCreate="Thêm một tác vụ"
