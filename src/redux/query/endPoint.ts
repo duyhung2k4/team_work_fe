@@ -11,19 +11,19 @@ import { AxiosRequestConfig } from "axios";
 export const endPoint = {
   public: {
     sendInfoRegister: (data: RequestSendInfoRegister): AxiosRequestConfig => ({
-      url: "/api/v1/public/send_info",
+      url: "/api/v1/account/public/send_info",
       method: METHOD.POST,
       headers: HEADER.public(),
       data,
     }),
     confirmCodeRegister: (data: RequestConfirmCodeRegister): AxiosRequestConfig => ({
-      url: "/api/v1/public/confirm_code",
+      url: "/api/v1/account/public/confirm_code",
       method: METHOD.POST,
       headers: HEADER.public(),
       data,
     }),
     loginInfo: (data: LoginRequest) => ({
-      url: "/api/v1/public/login",
+      url: "/api/v1/account/public/login",
       method: METHOD.POST,
       headers: HEADER.public(),
       data,
@@ -32,7 +32,7 @@ export const endPoint = {
 
   protected: {
     loginToken: () => ({
-      url: "/api/v1/protected/login_token",
+      url: "/api/v1/account/protected/login_token",
       method: METHOD.POST,
       headers: HEADER.protected("refresh"),
     }),
